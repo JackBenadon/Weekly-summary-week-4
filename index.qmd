@@ -1,6 +1,6 @@
 ---
-title: "Weekly Summary Template"
-author: "Author Name"
+title: "Weekly Summary Week 4"
+author: "Jack Benadon"
 title-block-banner: true
 title-block-style: default
 toc: true
@@ -19,29 +19,101 @@ Include a _very brief_ summary of what you learnt in this class here.
 
 Today, I learnt the following concepts in class:
 
-1. Item 1
-1. Item 2
-1. Item 3
+1. Statistical Learning
+1. Regression
+1. We went in depth on best fit lines
 :::
 
-Provide more concrete details here. You can also use footenotes[^footnote] if you like
-
-```{R results='hide'}
-#| output: false
-library(dplyr)
-library(purrr)
+```{r}
+library(tidyverse)
+library(ISLR2)
+library(cowplot)
+library(kableExtra)
+library(htmlwidgets)
 ```
 
+## Statistical learning:
+Suppose we are given a dataset called the predictor variables/covariates that are denoted by _$X$_.
 
-For example: 
-in class we learnt we learnt about the `map` function from the `purrr` package. 
+And the response/outcome variable called _$Y$_.
 
+The goal of statistical learning is to find a function _$f$_ such that _$Y$_=_$F(X)$_.
 
-```{R results='hide', fig.width=7, fig.height=7}
-par(mfrow=c(3, 3), mar=c(3.5, 3.5, 2, 1), mgp=c(2.4, 0.8, 0))
-map(1:9, function(i)rnorm(1000) %>% hist(., main=i, col=i))
+There are different flavors of statistical learning:
+
+* Supervised learning: _$y,x$_
+  - Regression _when $y$ is in R_
+  - Classification
+* Unsupervised learning: _There is no $y$_
+* Semi-supervised learning: _When we have $y$ but $x$ has significantly more observations than $y$_
+* Reinforcement learning: _When your model is when the $x$ and $y$ datasets are allowed to change_
+
+### Today we are going to be focusing on regression.
+```{r}
+url <- "https://online.stat.psu.edu/stat462/sites/onlinecourses.science.psu.edu.stat462/files/data/poverty/index.txt"
+
+df <- read_tsv(url)
+df %>% head(.,10) %>% kable
 ```
 
+#### Our goal is to predict the birth rate as a function of the poverty rate
+
+```{r}
+x <- df$PovPct
+y <- df$Brth15to17
+```
+
+Now we are going to visualize the relationship between $x$ and $y$ with a scatter plot
+```{r}
+
+colnames(df) <- tolower(colnames(df))  
+plt <- function (){
+plot(x,y, pch=20, xlab = "Pov %", ylab = "Birth rate (15-17)")
+}
+```
+
+#### Lines throught the points: 
+
+```{r}
+b0 <- c(-2,0,2)
+b1 <- c(1,2,3)
+
+par(mfrow = c(3,3))
+for (B0 in b0){
+  for(B1 in b1){
+    plt()
+    curve(B0 + B1 * x ,0,30, add=T, col='red')
+    title(main = paste("b0 = ", B0, "and b1 = ", B1))
+  }
+}
+```
+The distance between the point and the regression line is equal to $y$ - $yhat$
+
+#### Leat squares estimator:
+```{r}
+b0 <- 10
+b1 <-1.1
+
+yhat <- b0 + b1 * x
+
+plt()
+curve(b0 +b1 * x, 0 ,30, add = t, col='red')
+title(main = paste('b0 = ', b0, ' and b1= ', b1))
+segments (x,y,x, yhat)
+
+resids <- abs(y-yhat)^2
+ss_resids <- sum(resids)
+title(main = paste("b0, b1, ss_residuals = ", b0, b1, ss_resids, sep=','))
+
+```
+
+#### The best fit line minimizes residuals
+```{r}
+ model <- lm(y~x)
+ sum(residuals(model)^2)
+ 
+ summary(model)
+```
 
 
 ## Thursday, Jan 19
@@ -64,13 +136,6 @@ Provide more concrete details here, e.g.,
 
 In class we learnt how to use the `map` function to create multiple regression diagnostic plots
 
-```{R results='hide', fig.height=4}
-par(mfcol=c(2, 3), mar=c(3.5, 3.5, 2, 1), mgp=c(2.4, 0.8, 0))
-mtcars %>%
-  split(.$cyl) %>%
-  map(~ lm(mpg ~ wt, data = .x)) %>%
-  map(function(x)plot(x, which=c(1, 2)))
-```
 
 
 [^footnote]: You can include some footnotes here
