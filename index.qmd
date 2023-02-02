@@ -5,7 +5,7 @@ title-block-banner: true
 title-block-style: default
 toc: true
 format: html
-# format: pdf
+ #format: pdf
 ---
 
 ---
@@ -15,18 +15,17 @@ format: html
 ::: {.callout-important}
 ## TIL
 
-Include a _very brief_ summary of what you learnt in this class here. 
 
 Today, I learnt the following concepts in class:
 
 1. Statistical Learning
 1. Regression
-1. We went in depth on best fit lines
+1. We went in depth on best fit lines and the distance of the point from the line
 :::
 
 ```{r}
 library(tidyverse)
-library(ISLR2)
+library(ISLR2) #package associated with the text book
 library(cowplot)
 library(kableExtra)
 library(htmlwidgets)
@@ -75,7 +74,7 @@ plot(x,y, pch=20, xlab = "Pov %", ylab = "Birth rate (15-17)")
 #### Lines throught the points: 
 
 ```{r}
-b0 <- c(-2,0,2)
+b0 <- c(0,1,2)
 b1 <- c(1,2,3)
 
 par(mfrow = c(3,3))
@@ -103,7 +102,7 @@ segments (x,y,x, yhat)
 
 resids <- abs(y-yhat)^2
 ss_resids <- sum(resids)
-title(main = paste("b0, b1, ss_residuals = ", b0, b1, ss_resids, sep=','))
+title(main = paste("b0, b1, ss_residuals = ", b0, b1, ss_resids, sep=', '))
 
 ```
 
@@ -123,19 +122,169 @@ title(main = paste("b0, b1, ss_residuals = ", b0, b1, ss_resids, sep=','))
 ::: {.callout-important}
 ## TIL
 
-Include a _very brief_ summary of what you learnt in this class here. 
-
 Today, I learnt the following concepts in class:
 
-1. Item 1
-1. Item 2
-1. Item 3
+1. Linear models
+1. Terminology of regression and linear models
+1. Prediction in linear regression
 :::
 
-Provide more concrete details here, e.g., 
+If we want to model $y$ as a function of $x$. We have to do:
+```{r}
+formula(y ~ x)
+```
 
-In class we learnt how to use the `map` function to create multiple regression diagnostic plots
+A liner regression model in r is called using the **L**inear **M**odel _(therefore: lm)_.
+```{r}
+model <- lm(y~x)
+```
+
+### What are the null and alternate hypotheses for a regression model?
+Lets think about the objective of this: **We want to find the best linear model to fit $y \sin x$**
+
+The null hypothesis is: 
+
+> There is no linear relationship between $y$ and $x$.
+ 
+ What does it mean in terms of $\beta_0$ and $\beta_1$? **It means that $\beta_1 = 0$** in $H_0$
+ 
+ The alternate hypothesis is that $\beta_1 \neq 0$
+ 
+ **To summarize:**
+$$
+\begin {align}
+H_0: \beta_1 = 0 && H_1: \beta_1 \neq 0
+\end {align}
+$$
+When we see a small $p$ value, then we reject the null hypothesis in fabour of the alternate hypothesis. What is the implication of this w.r.t the original model objective?
+
+> There is a significant relationship between $y$ and $x$. Or, in more mathematical terms, there is significant evidence in favour of a correlation between $x$ and $y$.
+
+This is what the $p$-values in the model output are capturing. We can also use the `kable` function to print out the results nicely.
+
+```{r}
+library(broom)
+summary(model) %>%
+broom::tidy()%>%
+knitr::kable()
+```
+
+
+We have the following terminology for different components of the model:
+
+1. Covariate: $x$
+```{r}
+summary(x)
+```
+
+2. Response: $y$
+```{r}
+head(y)
+```
+
+3. Fitted values: $\hat{y}$
+```{r}
+yhat <- fitted(model)
+```
+
+4. Residuals: $e = y - \hat{y}$
+```{r}
+res <- residuals(model)
+head(res)
+```
+
+Some other important terms are the following:
+
+1. Sum of squares for residuals:
+$SS_{Res} = \sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y-i - \hat{y}_i^2)$
+
+2. Sum of squares for regression:
+$SS_{Reg} = \sum_ {i=1}^n e_i^2 (\hat{y}_i - \bar{y})^2$
+
+3. Sum of squares total
+$SS_{Tot} = \sum{i=1}^n ({y}_i-\bar{y})^2$
+
+Another important summary in the model output is the $R^2$ value, which is given as follows:
+$$
+R^2 = \frac{SS_{Reg}}{SS_{Tot}}
+$$
+Lets have a look at what this means in the following example. Im going to create the following examples:
+
+```{r}
+x <- seq(0,5,length = 100)
+
+b0 <- 1
+b1 <- 3
+
+y1 <- b0 +b1 * x + rnorm(100)
+y2 <- b0 +b1 * x + rnorm(100) *3
+
+par(mfrow=c(1,2))
+
+plot(x,y1)
+
+plot(x,y2)
+
+```
+```{r}
+model1 <- lm(y1 ~ x )
+model2 <- lm(y2 ~ x)
+
+par(mfrow=c(1,2))
+
+plot(x,y1)
+curve(
+  coef(model1)[1] + coef(model1)[2] *x, add=T, col= "red"
+)
+
+plot(x,y2)
+curve(
+  coef(model2)[1] + coef(model2)[2] *x, add=T, col= "red"
+)
+```
+The summary for model1 is: 
+```{r}
+summary(model1)
+```
+
+The summary for model2 is:
+```{r}
+summary(model2)
+```
+
+Lets go back to the poverty dataset.
+```{r}
+x <- df$povpct
+y <-df$brth15to17
+plt()
+```
+
+Suppose we have a new state whose `povpct` is $21$.
+```{r}
+plt()
+abline(v =21,col="green")
+lines(x,fitted(lm(y~x)), col='red')
+```
+
+What could we do to predict the $y$ value for this new state?
+
+our best prediction is going to be in the intersection. In `R` we can use the `predict()` function to do this:
+
+```{r}
+new_x <- data.frame(x = c(21))
+new_y <- predict(model, new_x)
+
+new_y
+
+plt()
+abline(v =21,col="green")
+lines(x,fitted(lm(y~x)), col='red')
+points(new_x, new_y, col = 'purple')
+```
 
 
 
-[^footnote]: You can include some footnotes here
+
+
+
+

@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Author Name">
+<meta name="author" content="Jack Benadon">
 
-<title>Weekly Summary Template</title>
+<title>Weekly Summary Week 4</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -98,6 +98,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -106,7 +107,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Weekly Summary Template</h1>
+      <h1 class="title">Weekly Summary Week 4</h1>
                       </div>
   </div>
     
@@ -116,7 +117,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Author Name </p>
+               <p>Jack Benadon </p>
             </div>
     </div>
       
@@ -132,7 +133,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#tuesday-jan-17" id="toc-tuesday-jan-17" class="nav-link active" data-scroll-target="#tuesday-jan-17">Tuesday, Jan 17</a></li>
-  <li><a href="#thursday-jan-19" id="toc-thursday-jan-19" class="nav-link" data-scroll-target="#thursday-jan-19">Thursday, Jan 19</a></li>
+  <li><a href="#statistical-learning" id="toc-statistical-learning" class="nav-link" data-scroll-target="#statistical-learning">Statistical learning:</a>
+  <ul class="collapse">
+  <li><a href="#today-we-are-going-to-be-focusing-on-regression." id="toc-today-we-are-going-to-be-focusing-on-regression." class="nav-link" data-scroll-target="#today-we-are-going-to-be-focusing-on-regression.">Today we are going to be focusing on regression.</a></li>
+  </ul></li>
+  <li><a href="#thursday-jan-19" id="toc-thursday-jan-19" class="nav-link" data-scroll-target="#thursday-jan-19">Thursday, Jan 19</a>
+  <ul class="collapse">
+  <li><a href="#what-are-the-null-and-alternate-hypotheses-for-a-regression-model" id="toc-what-are-the-null-and-alternate-hypotheses-for-a-regression-model" class="nav-link" data-scroll-target="#what-are-the-null-and-alternate-hypotheses-for-a-regression-model">What are the null and alternate hypotheses for a regression model?</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -154,28 +162,262 @@ TIL
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Include a <em>very brief</em> summary of what you learnt in this class here.</p>
 <p>Today, I learnt the following concepts in class:</p>
 <ol type="1">
-<li>Item 1</li>
-<li>Item 2</li>
-<li>Item 3</li>
+<li>Statistical Learning</li>
+<li>Regression</li>
+<li>We went in depth on best fit lines and the distance of the point from the line</li>
 </ol>
 </div>
 </div>
-<p>Provide more concrete details here. You can also use footenotes<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> if you like</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+✔ ggplot2 3.4.0     ✔ purrr   1.0.1
+✔ tibble  3.1.8     ✔ dplyr   1.1.0
+✔ tidyr   1.3.0     ✔ stringr 1.5.0
+✔ readr   2.1.3     ✔ forcats 1.0.0
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()</code></pre>
 </div>
-<p>For example: in class we learnt we learnt about the <code>map</code> function from the <code>purrr</code> package.</p>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ISLR2) <span class="co">#package associated with the text book</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'kableExtra'
+
+The following object is masked from 'package:dplyr':
+
+    group_rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(htmlwidgets)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="statistical-learning" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-learning">Statistical learning:</h2>
+<p>Suppose we are given a dataset called the predictor variables/covariates that are denoted by <em><span class="math inline">\(X\)</span></em>.</p>
+<p>And the response/outcome variable called <em><span class="math inline">\(Y\)</span></em>.</p>
+<p>The goal of statistical learning is to find a function <em><span class="math inline">\(f\)</span></em> such that <em><span class="math inline">\(Y\)</span></em>=<em><span class="math inline">\(F(X)\)</span></em>.</p>
+<p>There are different flavors of statistical learning:</p>
+<ul>
+<li>Supervised learning: <em><span class="math inline">\(y,x\)</span></em>
+<ul>
+<li>Regression <em>when <span class="math inline">\(y\)</span> is in R</em></li>
+<li>Classification</li>
+</ul></li>
+<li>Unsupervised learning: <em>There is no <span class="math inline">\(y\)</span></em></li>
+<li>Semi-supervised learning: <em>When we have <span class="math inline">\(y\)</span> but <span class="math inline">\(x\)</span> has significantly more observations than <span class="math inline">\(y\)</span></em></li>
+<li>Reinforcement learning: <em>When your model is when the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> datasets are allowed to change</em></li>
+</ul>
+<section id="today-we-are-going-to-be-focusing-on-regression." class="level3">
+<h3 class="anchored" data-anchor-id="today-we-are-going-to-be-focusing-on-regression.">Today we are going to be focusing on regression.</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">3.5</span>, <span class="fl">3.5</span>, <span class="dv">2</span>, <span class="dv">1</span>), <span class="at">mgp=</span><span class="fu">c</span>(<span class="fl">2.4</span>, <span class="fl">0.8</span>, <span class="dv">0</span>))</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="cf">function</span>(i)<span class="fu">rnorm</span>(<span class="dv">1000</span>) <span class="sc">%&gt;%</span> <span class="fu">hist</span>(., <span class="at">main=</span>i, <span class="at">col=</span>i))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://online.stat.psu.edu/stat462/sites/onlinecourses.science.psu.edu.stat462/files/data/poverty/index.txt"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 51 Columns: 6
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: "\t"
+chr (1): Location
+dbl (5): PovPct, Brth15to17, Brth18to19, ViolCrime, TeenBrth
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">head</span>(.,<span class="dv">10</span>) <span class="sc">%&gt;%</span> kable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Location </th>
+   <th style="text-align:right;"> PovPct </th>
+   <th style="text-align:right;"> Brth15to17 </th>
+   <th style="text-align:right;"> Brth18to19 </th>
+   <th style="text-align:right;"> ViolCrime </th>
+   <th style="text-align:right;"> TeenBrth </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Alabama </td>
+   <td style="text-align:right;"> 20.1 </td>
+   <td style="text-align:right;"> 31.5 </td>
+   <td style="text-align:right;"> 88.7 </td>
+   <td style="text-align:right;"> 11.2 </td>
+   <td style="text-align:right;"> 54.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Alaska </td>
+   <td style="text-align:right;"> 7.1 </td>
+   <td style="text-align:right;"> 18.9 </td>
+   <td style="text-align:right;"> 73.7 </td>
+   <td style="text-align:right;"> 9.1 </td>
+   <td style="text-align:right;"> 39.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Arizona </td>
+   <td style="text-align:right;"> 16.1 </td>
+   <td style="text-align:right;"> 35.0 </td>
+   <td style="text-align:right;"> 102.5 </td>
+   <td style="text-align:right;"> 10.4 </td>
+   <td style="text-align:right;"> 61.2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Arkansas </td>
+   <td style="text-align:right;"> 14.9 </td>
+   <td style="text-align:right;"> 31.6 </td>
+   <td style="text-align:right;"> 101.7 </td>
+   <td style="text-align:right;"> 10.4 </td>
+   <td style="text-align:right;"> 59.9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> California </td>
+   <td style="text-align:right;"> 16.7 </td>
+   <td style="text-align:right;"> 22.6 </td>
+   <td style="text-align:right;"> 69.1 </td>
+   <td style="text-align:right;"> 11.2 </td>
+   <td style="text-align:right;"> 41.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Colorado </td>
+   <td style="text-align:right;"> 8.8 </td>
+   <td style="text-align:right;"> 26.2 </td>
+   <td style="text-align:right;"> 79.1 </td>
+   <td style="text-align:right;"> 5.8 </td>
+   <td style="text-align:right;"> 47.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Connecticut </td>
+   <td style="text-align:right;"> 9.7 </td>
+   <td style="text-align:right;"> 14.1 </td>
+   <td style="text-align:right;"> 45.1 </td>
+   <td style="text-align:right;"> 4.6 </td>
+   <td style="text-align:right;"> 25.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Delaware </td>
+   <td style="text-align:right;"> 10.3 </td>
+   <td style="text-align:right;"> 24.7 </td>
+   <td style="text-align:right;"> 77.8 </td>
+   <td style="text-align:right;"> 3.5 </td>
+   <td style="text-align:right;"> 46.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> District_of_Columbia </td>
+   <td style="text-align:right;"> 22.0 </td>
+   <td style="text-align:right;"> 44.8 </td>
+   <td style="text-align:right;"> 101.5 </td>
+   <td style="text-align:right;"> 65.0 </td>
+   <td style="text-align:right;"> 69.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Florida </td>
+   <td style="text-align:right;"> 16.2 </td>
+   <td style="text-align:right;"> 23.2 </td>
+   <td style="text-align:right;"> 78.4 </td>
+   <td style="text-align:right;"> 7.3 </td>
+   <td style="text-align:right;"> 44.5 </td>
+  </tr>
+</tbody>
+</table>
+
 </div>
 </div>
+<section id="our-goal-is-to-predict-the-birth-rate-as-a-function-of-the-poverty-rate" class="level4">
+<h4 class="anchored" data-anchor-id="our-goal-is-to-predict-the-birth-rate-as-a-function-of-the-poverty-rate">Our goal is to predict the birth rate as a function of the poverty rate</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> df<span class="sc">$</span>PovPct</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> df<span class="sc">$</span>Brth15to17</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we are going to visualize the relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> with a scatter plot</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df) <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">colnames</span>(df))  </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="cf">function</span> (){</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y, <span class="at">pch=</span><span class="dv">20</span>, <span class="at">xlab =</span> <span class="st">"Pov %"</span>, <span class="at">ylab =</span> <span class="st">"Birth rate (15-17)"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="lines-throught-the-points" class="level4">
+<h4 class="anchored" data-anchor-id="lines-throught-the-points">Lines throught the points:</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (B0 <span class="cf">in</span> b0){</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(B1 <span class="cf">in</span> b1){</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plt</span>()</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">curve</span>(B0 <span class="sc">+</span> B1 <span class="sc">*</span> x ,<span class="dv">0</span>,<span class="dv">30</span>, <span class="at">add=</span>T, <span class="at">col=</span><span class="st">'red'</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">title</span>(<span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"b0 = "</span>, B0, <span class="st">"and b1 = "</span>, B1))</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The distance between the point and the regression line is equal to <span class="math inline">\(y\)</span> - <span class="math inline">\(yhat\)</span></p>
+</section>
+<section id="leat-squares-estimator" class="level4">
+<h4 class="anchored" data-anchor-id="leat-squares-estimator">Leat squares estimator:</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span><span class="fl">1.1</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1 <span class="sc">*</span> x</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(b0 <span class="sc">+</span>b1 <span class="sc">*</span> x, <span class="dv">0</span> ,<span class="dv">30</span>, <span class="at">add =</span> t, <span class="at">col=</span><span class="st">'red'</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main =</span> <span class="fu">paste</span>(<span class="st">'b0 = '</span>, b0, <span class="st">' and b1= '</span>, b1))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span> (x,y,x, yhat)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>resids <span class="ot">&lt;-</span> <span class="fu">abs</span>(y<span class="sc">-</span>yhat)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>ss_resids <span class="ot">&lt;-</span> <span class="fu">sum</span>(resids)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"b0, b1, ss_residuals = "</span>, b0, b1, ss_resids, <span class="at">sep=</span><span class="st">', '</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="the-best-fit-line-minimizes-residuals" class="level4">
+<h4 class="anchored" data-anchor-id="the-best-fit-line-minimizes-residuals">The best fit line minimizes residuals</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a> model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">sum</span>(<span class="fu">residuals</span>(model)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1509.635</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-11.2275  -3.6554  -0.0407   2.4972  10.5152 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   4.2673     2.5297   1.687    0.098 .  
+x             1.3733     0.1835   7.483 1.19e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 5.551 on 49 degrees of freedom
+Multiple R-squared:  0.5333,    Adjusted R-squared:  0.5238 
+F-statistic:    56 on 1 and 49 DF,  p-value: 1.188e-09</code></pre>
+</div>
+</div>
+</section>
+</section>
 </section>
 <section id="thursday-jan-19" class="level2">
 <h2 class="anchored" data-anchor-id="thursday-jan-19">Thursday, Jan 19</h2>
@@ -189,36 +431,252 @@ TIL
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Include a <em>very brief</em> summary of what you learnt in this class here.</p>
 <p>Today, I learnt the following concepts in class:</p>
 <ol type="1">
-<li>Item 1</li>
-<li>Item 2</li>
-<li>Item 3</li>
+<li>Linear models</li>
+<li>Terminology of regression and linear models</li>
+<li>Prediction in linear regression</li>
 </ol>
 </div>
 </div>
-<p>Provide more concrete details here, e.g.,</p>
-<p>In class we learnt how to use the <code>map</code> function to create multiple regression diagnostic plots</p>
+<p>If we want to model <span class="math inline">\(y\)</span> as a function of <span class="math inline">\(x\)</span>. We have to do:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfcol=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="fl">3.5</span>, <span class="fl">3.5</span>, <span class="dv">2</span>, <span class="dv">1</span>), <span class="at">mgp=</span><span class="fu">c</span>(<span class="fl">2.4</span>, <span class="fl">0.8</span>, <span class="dv">0</span>))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split</span>(.<span class="sc">$</span>cyl) <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt, <span class="at">data =</span> .x)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="cf">function</span>(x)<span class="fu">plot</span>(x, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">formula</span>(y <span class="sc">~</span> x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>y ~ x</code></pre>
+</div>
+</div>
+<p>A liner regression model in r is called using the <strong>L</strong>inear <strong>M</strong>odel <em>(therefore: lm)</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="what-are-the-null-and-alternate-hypotheses-for-a-regression-model" class="level3">
+<h3 class="anchored" data-anchor-id="what-are-the-null-and-alternate-hypotheses-for-a-regression-model">What are the null and alternate hypotheses for a regression model?</h3>
+<p>Lets think about the objective of this: <strong>We want to find the best linear model to fit <span class="math inline">\(y \sin x\)</span></strong></p>
+<p>The null hypothesis is:</p>
+<blockquote class="blockquote">
+<p>There is no linear relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>.</p>
+</blockquote>
+<p>What does it mean in terms of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>? <strong>It means that <span class="math inline">\(\beta_1 = 0\)</span></strong> in <span class="math inline">\(H_0\)</span></p>
+<p>The alternate hypothesis is that <span class="math inline">\(\beta_1 \neq 0\)</span></p>
+<p><strong>To summarize:</strong> <span class="math display">\[
+\begin {align}
+H_0: \beta_1 = 0 &amp;&amp; H_1: \beta_1 \neq 0
+\end {align}
+\]</span> When we see a small <span class="math inline">\(p\)</span> value, then we reject the null hypothesis in fabour of the alternate hypothesis. What is the implication of this w.r.t the original model objective?</p>
+<blockquote class="blockquote">
+<p>There is a significant relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>. Or, in more mathematical terms, there is significant evidence in favour of a correlation between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
+</blockquote>
+<p>This is what the <span class="math inline">\(p\)</span>-values in the model output are capturing. We can also use the <code>kable</code> function to print out the results nicely.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> term </th>
+   <th style="text-align:right;"> estimate </th>
+   <th style="text-align:right;"> std.error </th>
+   <th style="text-align:right;"> statistic </th>
+   <th style="text-align:right;"> p.value </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:right;"> 4.267293 </td>
+   <td style="text-align:right;"> 2.529747 </td>
+   <td style="text-align:right;"> 1.686846 </td>
+   <td style="text-align:right;"> 0.0979904 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> x </td>
+   <td style="text-align:right;"> 1.373345 </td>
+   <td style="text-align:right;"> 0.183523 </td>
+   <td style="text-align:right;"> 7.483234 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>We have the following terminology for different components of the model:</p>
+<ol type="1">
+<li>Covariate: <span class="math inline">\(x\)</span></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   5.30   10.25   12.20   13.12   15.80   25.30 </code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li>Response: <span class="math inline">\(y\)</span></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 31.5 18.9 35.0 31.6 22.6 26.2</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Fitted values: <span class="math inline">\(\hat{y}\)</span></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> <span class="fu">fitted</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="1">
+<li>Residuals: <span class="math inline">\(e = y - \hat{y}\)</span></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">residuals</span>(model)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         1          2          3          4          5          6 
+-0.3715352  4.8819549  8.6218464  6.8698609 -4.6021608  9.8472677 </code></pre>
+</div>
+</div>
+<p>Some other important terms are the following:</p>
+<ol type="1">
+<li><p>Sum of squares for residuals: <span class="math inline">\(SS_{Res} = \sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y-i - \hat{y}_i^2)\)</span></p></li>
+<li><p>Sum of squares for regression: <span class="math inline">\(SS_{Reg} = \sum_ {i=1}^n e_i^2 (\hat{y}_i - \bar{y})^2\)</span></p></li>
+<li><p>Sum of squares total <span class="math inline">\(SS_{Tot} = \sum{i=1}^n ({y}_i-\bar{y})^2\)</span></p></li>
+</ol>
+<p>Another important summary in the model output is the <span class="math inline">\(R^2\)</span> value, which is given as follows: <span class="math display">\[
+R^2 = \frac{SS_{Reg}}{SS_{Tot}}
+\]</span> Lets have a look at what this means in the following example. Im going to create the following examples:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">5</span>,<span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> b0 <span class="sc">+</span>b1 <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> b0 <span class="sc">+</span>b1 <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>) <span class="sc">*</span><span class="dv">3</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y1)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y1 <span class="sc">~</span> x )</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y2 <span class="sc">~</span> x)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y1)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>(model1)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(model1)[<span class="dv">2</span>] <span class="sc">*</span>x, <span class="at">add=</span>T, <span class="at">col=</span> <span class="st">"red"</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y2)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>(model2)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(model2)[<span class="dv">2</span>] <span class="sc">*</span>x, <span class="at">add=</span>T, <span class="at">col=</span> <span class="st">"red"</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The summary for model1 is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y1 ~ x)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.39464 -0.58985 -0.07347  0.62533  2.31917 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.88185    0.18215   4.841 4.81e-06 ***
+x            2.98020    0.06294  47.351  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.9176 on 98 degrees of freedom
+Multiple R-squared:  0.9581,    Adjusted R-squared:  0.9577 
+F-statistic:  2242 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>The summary for model2 is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y2 ~ x)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-6.283 -2.142  0.043  2.120  7.157 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   1.0312     0.6129   1.682   0.0957 .  
+x             2.9697     0.2118  14.022   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.088 on 98 degrees of freedom
+Multiple R-squared:  0.6674,    Adjusted R-squared:  0.664 
+F-statistic: 196.6 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Lets go back to the poverty dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> df<span class="sc">$</span>povpct</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span>df<span class="sc">$</span>brth15to17</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Suppose we have a new state whose <code>povpct</code> is <span class="math inline">\(21\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plt</span>()</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span><span class="dv">21</span>,<span class="at">col=</span><span class="st">"green"</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x,<span class="fu">fitted</span>(<span class="fu">lm</span>(y<span class="sc">~</span>x)), <span class="at">col=</span><span class="st">'red'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>What could we do to predict the <span class="math inline">\(y\)</span> value for this new state?</p>
+<p>our best prediction is going to be in the intersection. In <code>R</code> we can use the <code>predict()</code> function to do this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>new_x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">21</span>))</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>new_y <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, new_x)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>new_y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1 
+33.10755 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plt</span>()</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span><span class="dv">21</span>,<span class="at">col=</span><span class="st">"green"</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x,<span class="fu">fitted</span>(<span class="fu">lm</span>(y<span class="sc">~</span>x)), <span class="at">col=</span><span class="st">'red'</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(new_x, new_y, <span class="at">col =</span> <span class="st">'purple'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
+</section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>You can include some footnotes here<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main>
+</main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
